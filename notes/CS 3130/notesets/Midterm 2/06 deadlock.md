@@ -92,3 +92,87 @@ void Eat() {
     * 5 philosophers, 4 chopsticks {{`Y`}}
 
 
+THIS ISNT RELEVANT ITS JUST I ACCIDENTALLY TOOK NOTES TWICE
+_Deadlock Requirements_
+* Mutual exclusion
+* Hold and wait
+* No preemption of resources
+* Circular wait
+
+How is deadlock possible?
+![image 1](00-01 how_deadlock.png){size=small}
+Given list: A, B, C, D, E 
+***Code***
+RemoveNode(LinkedListNode *node) { 
+pthread_mutex_lock(&node−>lock); 
+pthread_mutex_lock(&node−>prev−>lock); 
+pthread_mutex_lock(&node−>next−>lock); 
+node−>next−>prev = node−>prev; 
+node−>prev−>next = node−>next; 
+pthread_mutex_unlock(&node−>next−>lock); 
+pthread_mutex_unlock(&node−>prev−>lock); 
+pthread_mutex_unlock(&node−>lock); 
+} 
+***Code***
+Which of these (all run in parallel) can deadlock? 
+A. RemoveNode(B) and RemoveNode(C) 
+B. RemoveNode(B) and RemoveNode(D) 
+C. RemoveNode(B) and RemoveNode(C) and RemoveNode(D) 
+D. A and C 
+E. B and C 
+F. all of the above 
+G. none of the above
+
+Deadlock prevention techniques
+* infinite resources
+  * no mutual exclusion
+  * not practical
+* no shared resources
+  * no mutual exclusion
+  * defeats purpose of having multiple threads
+* no waiting
+  * avoids waiting for forever
+  * no hold and wait / preemption
+  * Options:
+    * abort and retry
+    * preempt resources aka steal locks
+  * acquire resources in consistent order
+    * no circular wait
+  * request all resources at once
+    * no hold and wait
+
+Abort and Retry
+* how many times will you retry?
+
+***
+struct Dir { 
+mutex_t lock; 
+HashMap entries; 
+}; 
+void MoveFile(Dir *from_dir, Dir *to_dir, string filename) { 
+while (true) { 
+mutex_lock(&from_dir−>lock); 
+if (mutex_trylock(&to_dir−>lock) == LOCKED) break; 
+mutex_unlock(&from_dir−>lock); 
+} 
+Map_put(to_dir−>entries, filename, Map_get(from_dir−>entries, filename)); 
+from_dir−>entries.erase(filename); 
+mutex_unlock(&to_dir−>lock); 
+mutex_unlock(&from_dir−>lock); 
+}
+***
+
+* possible problem: livelock
+  * essentially, really bad luck during abort and retry
+  ![image 1](00 livelock.png){size=small}
+  * prevention:
+    * make schedule random
+    * make threads run one at a time
+
+Stealing locks
+* unclean: just kill the thread
+* clean: have code to undo partial operation
+  * revocable locks
+
+Acquiring locks in consistent order
+* achieve either by comparing pointers OR by convention (ie document the required order and enforce it you HAVE to use them in this order)
