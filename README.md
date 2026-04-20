@@ -21,6 +21,7 @@ I built this little thing that renders my class notes for school (.md files) int
 ## Getting Started
 
 If you want to run MDengine to make your own awesome notes!....:
+_Make sure you command into the md-engine directory and don't run this script from the container directory!_
 
 ### Local development
 ```bash
