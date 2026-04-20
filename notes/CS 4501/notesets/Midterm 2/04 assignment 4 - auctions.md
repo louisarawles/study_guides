@@ -1,158 +1,23 @@
 # ASSIGNMENT 4: AUCTIONS
 
-## eBay Auction Design
+---
 
-### Why is eBay NOT strategy-proof?
-
-Key idea:
-- In eBay, winner pays {{second-highest bid + ε}}
-
-This differs from SPSB because:
-- True SPSB pays {{exact second-highest bid}}
+## Question 2. Collusion and Shill Bids
 
 ---
 
-### Incentive to shade bids
+### (a)
 
-Example:
-- v₁ = 10, v₂ = 7, ε = 0.50
+Consider an SPSB auction with bidders of value 4, 8, 10 colluding, and another bidder with bid 6.
 
-Truthful outcome:
-- price = {{7.50}}
-- utility = {{10 - 7.5 = 2.5}}
-
-Shaded bid:
-- bid = {{7.49}}
-- price = {{7.49}}
-- utility = {{10 - 7.49 = 2.51}}
-
-Conclusion:
-- bidder benefits from {{shading bid slightly below (b₂ + ε)}} :contentReference[oaicite:0]{index=0}
-
----
-
-## eBay Price Formula
-
-- price = {{min(b₁, b₂ + ε)}}
-- ask price = {{p + ε}}
-
----
-
-## Key Insight
-
-- eBay is NOT strategy-proof because:
-  {{winner pays strictly more than second-highest bid}}
-
----
-
-## Collusion in SPSB
-
-### Strategy
-
-Coalition:
-- values: 4, 8, 10
-- outside bidder: 6
-
-Collusive strategy:
-- strongest bidder bids {{10}}
-- others bid {{0}}
-
----
-
-### Outcome
-
-- winner pays {{6}}
-- coalition redistributes surplus
-
----
-
-### Why no deviation?
-
-- smaller bidders cannot win anyway → {{no incentive to deviate}}
-
-# ASSIGNMENT 4: AUCTIONS
-
-## Question 1(a): eBay Design
-
-### Prompt
-Explain how a bidder can benefit from bidding less than their true value in eBay.
-
----
-
-### Key Recall
-
-- eBay price rule:
-  {{p_t = min(b_(1), b_(2) + ε)}}
-
-- Difference from SPSB:
-  {{winner pays second price + ε, not exactly second price}}
-
----
-
-### Example
-
-- v₁ = 10, v₂ = 7, ε = 0.50
-
-Truthful:
-- price = {{7.50}}
-- utility = {{10 - 7.50 = 2.5}}
-
-Shaded bid:
-- bid = {{7.49}}
-- price = {{7.49}}
-- utility = {{10 - 7.49 = 2.51}}
-
----
-
-### Conclusion
-
-- Incentive:
-  {{bidder can gain by bidding slightly below b₂ + ε}}
-
-- Why:
-  {{price depends on own bid, breaking strategy-proofness}} :contentReference[oaicite:0]{index=0}
-
----
-
-## Question 1(b): Auction State Tracking
-
-### Prompt
-Track price, ask price, and winner after each bid.
-
----
-
-### Core Formulas
-
-- price:
-  {{p_t = min(b_(1), b_(2) + ε)}}
-
-- ask price:
-  {{p_ask = p_t + ε}}
-
----
-
-### Final Outcome
-
-- Winner:
-  {{bidder 4}}
-
-- Final price:
-  {{28.99}}
-
----
-
-## Question 2: Collusion
-
-### Prompt
-How can bidders collude in SPSB?
+How can bidders 1, 2, 3 collude?
 
 ---
 
 ### Strategy
 
-- strongest bidder bids:
-  {{true value}}
-
+- bidder 3 bids:
+  {{10}}
 - others bid:
   {{0}}
 
@@ -161,11 +26,196 @@ How can bidders collude in SPSB?
 ### Outcome
 
 - winner pays:
-  {{outside bidder’s value}}
+  {{6 instead of 8}}
+
+---
+
+### Side Payments
+
+- bidder 3 shares profit:
+  {{with bidders 1 and 2}}
+
+---
+
+### Why no deviation?
+
+- bidders 1 and 2 would need to bid:
+  {{above 10 to win}}
 
 ---
 
 ### Key Insight
 
-- collusion lowers price because:
-  {{competition is removed}}
+- collusion lowers price by:
+  {{removing competition}}
+
+---
+
+### (b)
+
+Now consider the FPSB auction. Is it more or less robust to collusion?
+
+---
+
+### Candidate Strategy
+
+- bidder 3 bids:
+  {{6 + ε}}
+
+---
+
+### Deviation
+
+- bidder 2 can bid:
+  {{6 + 2ε}}
+
+---
+
+### Result
+
+- bidder 2 profit:
+  {{≈ 2 − 2ε}}
+
+---
+
+### Conclusion
+
+- FPSB is:
+  {{more robust to collusion}}
+
+---
+
+### Key Insight
+
+- collusion is unstable because:
+  {{members can profitably deviate}}
+
+---
+
+### (c)
+
+Explain why shill bidding is a problem in SPSB.
+
+---
+
+### Mechanism
+
+- auctioneer inserts:
+  {{fake bid just below highest bid}}
+
+---
+
+### Effect
+
+- increases price to:
+  {{near highest bid}}
+
+---
+
+### Result
+
+- SPSB behaves like:
+  {{first-price auction}}
+
+---
+
+### Key Insight
+
+- equilibrium becomes:
+  {{FPSB-style bid shading}}
+
+---
+
+## Question 3. All-Pay Auction
+
+---
+
+### (a)
+
+Verify that:
+
+s*(v_i) = 1/2 v_i²
+
+is a Bayes-Nash equilibrium.
+
+---
+
+### Step 1: Winning Probability
+
+Assume bidder 2 follows the strategy, s.t. b_2 = v_2 ^2 / 2
+* Hint: {{ standard in BNE proofs, assume others play equilibrium --> show best response is same strategy}}
+
+- P(b₁ > b₂) =
+  {{P(b₁ > v₂²/2)}}
+
+- rewrite:
+  {{P(2b₁ > v₂²)}}
+
+- result:
+  {{(2b₁)^(1/2)}}
+
+---
+
+Hint: {{ Since v_2 ~ U(0,1): P(v_2 < x) = x, so --> P(win) = 2 \sqrt{b_1} }}
+
+### Step 2: Expected Utility
+
+Hint: {{ in an all pay auction, u = v * P(win) - bid }}
+
+- u₁(b₁) =
+  {{v₁ (2b₁)^(1/2) − b₁}}
+
+---
+
+### Step 3: First-Order Condition
+
+- derivative = 0 ⇒
+  {{b₁ = v₁² / 2}}
+
+---
+
+### Step 4: Second-Order Condition
+
+- check:
+  {{second derivative < 0}}
+
+---
+
+### Conclusion
+
+- equilibrium strategy:
+  {{s*(v_i) = v_i² / 2}}
+
+---
+
+### Key Insight
+
+- bids are lower because:
+  {{you pay even if you lose}}
+
+---
+
+### (b)
+
+Compare with FPSB equilibrium.
+
+---
+
+### FPSB Strategy
+
+- s*(v) =
+  {{v / 2}}
+
+---
+
+### Comparison
+
+- all-pay bids are:
+  {{always lower than FPSB bids}}
+
+---
+
+### Key Insight
+
+- all-pay discourages bidding because:
+  {{losers still pay}}

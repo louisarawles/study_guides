@@ -1,146 +1,267 @@
 # ASSIGNMENT 5: VCG MECHANISM
 
-## Reverse Auction (VCG)
+---
 
-### Setup
-- sellers have costs c_i
-
-### Allocation rule
-- choose seller with {{lowest reported cost}}
-
-### Payment rule
-- winner receives {{second-lowest cost}} :contentReference[oaicite:1]{index=1}
+## Question 1. VCG Mechanisms
 
 ---
 
-## Combinatorial Auction Example
+### (a) Reverse Auction
 
-Values:
-- bidder 1: {A,B} = 100
-- bidder 2: A = 70
-- bidder 3: B = 50
+Consider a reverse auction where sellers report costs.
 
-### Efficient allocation
-- assign A → {{bidder 2}}
-- assign B → {{bidder 3}}
+Describe the VCG allocation and payment rule.
 
 ---
 
-### Payments
+### Allocation Rule
 
-- bidder 2 pays {{50}}
-- bidder 3 pays {{30}}
-
-Interpretation:
-- they pay the {{externality imposed on others}}
+- choose seller with:
+  {{lowest reported cost}}
 
 ---
 
-## Public Project Insight
-
-If payments cover cost C:
-- either total value = {{C}}
-- or exactly {{one agent has non-zero value}}
-
----
-
-## Key VCG Formula
-
-- payment = {{others' value without i − others' value with i}}
-
----
-
-## Core Property
-
-VCG is strategy-proof because:
-- agents maximize {{true utility regardless of report}}
-
-# ASSIGNMENT 5: VCG MECHANISM
-
-## Question 1(a): Reverse Auction
-
-### Prompt
-Describe VCG for reverse auction.
-
----
-
-### Allocation
-
-- choose:
-  {{seller with lowest reported cost}}
-
----
-
-### Payment
+### Payment Rule
 
 - winner receives:
-  {{second-lowest cost}} :contentReference[oaicite:1]{index=1}
+  {{second-lowest reported cost}}
 
 ---
 
-## Question 1(b): Combinatorial VCG
+### Key Insight
 
-### Prompt
-Find allocation and payments.
+- reverse VCG = 
+  {{“second-price” for costs}}
+
+---
+
+---
+
+### (b) Combinatorial Auction
+
+There are two items A and B and three bidders:
+
+- bidder 1: v({A,B}) = 100  
+- bidder 2: v(A) = 70  
+- bidder 3: v(B) = 50  
+
+Find the efficient allocation and VCG payments.
+
+---
+
+### Efficient Allocation
+
+- option 1: bidder 1 gets both → value = {{100}}
+- option 2: bidder 2 gets A, bidder 3 gets B → value = {{120}}
 
 ---
 
 ### Allocation
 
-- efficient allocation:
-  {{A → bidder 2, B → bidder 3}}
+- A → {{bidder 2}}
+- B → {{bidder 3}}
 
 ---
 
-### Payments
+### Payment for Bidder 2
 
-- bidder 2 pays:
-  {{50}}
+- remove bidder 2:
+  best allocation = {{bidder 1 gets both → value 100}}
 
-- bidder 3 pays:
-  {{30}}
+- with bidder 2:
+  others get = {{50}}
 
 ---
 
-### Interpretation
+- payment:
+  {{100 − 50 = 50}}
 
-- payments equal:
+---
+
+### Payment for Bidder 3
+
+- remove bidder 3:
+  best allocation = {{bidder 1 gets both → value 100}}
+
+- with bidder 3:
+  others get = {{70}}
+
+---
+
+- payment:
+  {{100 − 70 = 30}}
+
+---
+
+### Key Insight
+
+- each bidder pays:
   {{externality imposed on others}}
 
 ---
 
-## Question 1(c): Public Project
+---
 
-### Prompt
-When do VCG payments cover cost?
+### (c) Public Project Problem
+![image 1](05-1c.png){size=medium}
+Consider a public project with cost C.
+
+Under what conditions do VCG payments exactly cover the cost?
 
 ---
 
 ### Cases
 
 - total value = {{C}}
-- OR one agent has {{nonzero value}}
+
+OR
+
+- exactly {{one agent has positive value}}
 
 ---
 
-## Question 1(e): Strategy-proofness
+### Key Insight
 
-### Prompt
-Why is VCG strategy-proof?
+- VCG may:
+  {{fail to balance budget}}
 
 ---
 
-### Key Step
+---
 
-- define menu:
-  {{B_i(v_{-i}) independent of i’s report}}
+### (d) Menu Interpretation
+
+Explain the “menu” interpretation of VCG.
+
+---
+
+### Key Idea
+
+- define:
+  {{B_i(v_{-i}) = outcomes + payments independent of i}}
+
+---
+
+### Meaning
+
+- agent chooses:
+  {{best outcome from menu}}
+
+---
+
+### Key Insight
+
+- VCG reduces to:
+  {{utility maximization over fixed choices}}
+
+---
+
+---
+
+### (e) Strategy-Proofness of VCG
+
+Prove that VCG is strategy-proof.
+
+---
+
+### Step 1
+
+- utility:
+  {{u_i = v_i(outcome) − payment}}
+
+---
+
+### Step 2
+
+- payment depends only on:
+  {{others’ reports}}
+
+---
+
+### Step 3
+
+- mechanism chooses:
+  {{allocation maximizing total value}}
 
 ---
 
 ### Conclusion
 
-- VCG selects:
-  {{allocation maximizing total value}}
+- best strategy:
+  {{truthful reporting}}
 
-- therefore:
-  {{truth-telling maximizes utility}}
+---
+
+### Key Insight
+
+- agents cannot:
+  {{manipulate prices directly}}
+
+---
+
+---
+
+### (f) Individual Rationality
+
+Explain why VCG is individually rational.
+
+---
+
+### Condition
+
+- agent can always get:
+  {{zero utility by not participating}}
+
+---
+
+### Conclusion
+
+- VCG guarantees:
+  {{non-negative utility}}
+
+---
+
+---
+
+### (g) Budget Balance
+
+Is VCG budget balanced?
+
+---
+
+### Answer
+
+- in general:
+  {{NO}}
+
+---
+
+### Reason
+
+- payments may:
+  {{not sum to total cost}}
+
+---
+
+### Key Insight
+
+- VCG trades off:
+  {{efficiency vs budget balance}}
+
+---
+
+---
+
+## Summary / Key Recall
+
+- allocation:
+  {{maximize total value}}
+
+- payment:
+  {{externality imposed}}
+
+- strategy-proof:
+  {{truth-telling optimal}}
+
+- NOT guaranteed:
+  {{budget balance}}
