@@ -1,4 +1,4 @@
-**MIDTERM 2 STUDY GUIDE**
+# MIDTERM 2 STUDY GUIDE
 
 Chapter 6: Auctions
 * don't need to know 6.6, 6.7
