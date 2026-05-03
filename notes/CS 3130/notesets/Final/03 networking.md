@@ -77,3 +77,47 @@ Going Faster
 * sending one message, waiting for acknowledgement, etc is SLOW
 * "best effort" --> Transmission Window
 * Transmission Window: Send a window of parts speculatively, then wait for ACKs
+
+## Protocols Reading
+
+### DHCP
+
+Flow: DORA
+1. Discover
+2. Offer
+3. Request
+4. Acknowledge
+
+Model:
+0. Your computer does NOT have an IP address yet, so it uses:
+   1. source IP = 0.0.0.0 (meaning "I don't have one yet)
+   2. destination IP = 255.255.255.255 (broadcast = "everyone on this network")
+1. Discover: client --> everyone
+   2. "Is there any DHCP server out there"
+   3. Sent as:
+      4. UDP port 68 --> 67
+      5. IP: 0.0.0.0 --> 255.255.255.255
+      6. includes MAC address aka hardware ID
+   7. broadcast because the client doesn't know who the server is yet
+   8. MAC address because it's the only unique identifier it has
+9. Offer (server --> client)
+   10. "yes! here is an IP address you can use"
+   11. server responds with:
+       12. an available IP address
+       13. still uses broadcast because the client doesn't officially own the IP yet
+   14. its possible that multiple servers could respond but usually only one does (if multiple did that would be handled in the next step)
+15. Request (client --> chosen server)
+    16. "I accept that specific IP address"
+    17. sent as:
+        18. UDP 68 --> 67
+        19. IP: 0.0.0.0 --> server IP
+    20. client only picks one offer which prevents multiple servers from assigning conflicting addresses
+21. Acknowledge (server --> client)
+    22. "confirmed -- that IP is officially yours"
+    23. server finalizes the assignment
+    24. now the client:
+        25. can use the IP
+        26. can start normal communication (like DNS, HTTP, etc)
+
+Since IPv6 is so big, typically the server will give part of an address and the server on the local network will fill in the rest because its easier to decentralize
+this is called: SLAAC

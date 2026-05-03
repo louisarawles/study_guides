@@ -1,9 +1,15 @@
 # Formulas
 
 1. **utility**: u_i = v_i - p_i
-2. **all-pay & BNE**
-   * expected payment (aka utility): u_i(b_i) = v_i*Pr(b_i > b_i') - b_i
-   * (in a uniform distribution, ie U(0,1) -- Pr(b_i > b_i') = ... = b_i > b_i' --> b_i = b_i'
+2. **BNE**
+   * expected payment (aka utility): 
+     * **all pay**: u_i(b_i) = v_i*Pr(b_i > b_i') - b_i
+     * **FPSB**: t(v) = b(v) * P(win)
+   * (in a uniform distribution, ie U(0,1), and b_i' = max b_{-i}) -- Pr(b_i > b_i') = ... = b_i > b_i' --> b_i = b_i'
+   * optimal bid: s*(v_i) (ie, v_i*(n-1)/n)
+   * interim allocation: x_i^*(v_i) = P(win)
+   * interim payment: t_i^*(v_i) = bid * P(win)
+   * expected revenue: \integ t_i^*(v)db
    * _assignment 4_
 3. **VCG payments**: 
    * general form: t_i = externality imposed on others
